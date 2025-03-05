@@ -12,15 +12,16 @@ const App: React.FC = () => {
     wordList[Math.floor(Math.random() * 850)]
   );
   const [charLeft, setCharLeft] = useState(wordObj.word.split(''));
-
   const charSpans = document.getElementsByClassName(
     'char-span'
   ) as HTMLCollectionOf<HTMLSpanElement>;
+  const isWinner = !charLeft.length;
+  const isGameOver = !attempts;
 
   function handleRefresh() {
     const newWordObj = wordList[Math.floor(Math.random() * 850)];
     setWordObj(newWordObj);
-    setKeyboardKey((prev) => prev + 1); // to remount the Keyboard component
+    setKeyboardKey((prev) => prev + 1); // just to remount the Keyboard component
     setAttempts(7);
     setCharLeft(newWordObj.word.split(''));
     for (let i = 0; i < charSpans.length; i++) {
@@ -73,7 +74,7 @@ const App: React.FC = () => {
 
   return (
     <div className="main">
-      <div>info container</div>
+      <div>Info Container</div>
       <div>
         <Hangman numberOfGuesses={attempts} />
       </div>
@@ -107,6 +108,8 @@ const App: React.FC = () => {
           key={keyboardKey}
           userInput={setUserInput}
           handleRefresh={handleRefresh}
+          isWinner={isWinner}
+          isGameOver={isGameOver}
         />
       </div>
     </div>

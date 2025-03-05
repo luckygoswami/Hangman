@@ -1,13 +1,21 @@
 import React, { useEffect } from 'react';
+import '../styles/Keyboard.css';
 
 const keyboardRows: string[] = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
 
 type KeyboardProps = {
   userInput: (key: string) => void;
   handleRefresh: () => void;
+  isWinner: boolean;
+  isGameOver: boolean;
 };
 
-const Keyboard: React.FC<KeyboardProps> = ({ userInput, handleRefresh }) => {
+const Keyboard: React.FC<KeyboardProps> = ({
+  userInput,
+  handleRefresh,
+  isWinner,
+  isGameOver,
+}) => {
   useEffect(() => {
     // handle keyboard input
     const handleKeypress = (e: globalThis.KeyboardEvent) => {
@@ -26,25 +34,29 @@ const Keyboard: React.FC<KeyboardProps> = ({ userInput, handleRefresh }) => {
   }, []);
 
   return (
-    <>
+    <div className="keyboard">
       {keyboardRows.map((row, index) => (
         <div
           className="row"
           key={index}>
-          {row.split('').map((char, index) => (
+          {row.split('').map((char) => (
             <button
-              key={index}
+              key={char}
               id={`${char}-btn`}
               className="char-btn"
-              value={char}
-              onClick={(e) => userInput(e.currentTarget.value)}>
+              disabled={isWinner || isGameOver}
+              onClick={() => userInput(char)}>
               {char}
             </button>
           ))}
         </div>
       ))}
-      <button onClick={handleRefresh}>spacebar</button>
-    </>
+      <button
+        className="spacebar-btn"
+        onClick={handleRefresh}>
+        Refresh
+      </button>
+    </div>
   );
 };
 

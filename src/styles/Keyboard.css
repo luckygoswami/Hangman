@@ -1,0 +1,53 @@
+/* Keyboard Styles */
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+}
+
+.char-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.char-btn:hover {
+  background-color: #2980b9;
+}
+
+.char-btn:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+/* Spacebar Button */
+.spacebar-btn {
+  margin-top: 12px;
+  padding: 12px 20px;
+  background-color: #2ecc71;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.spacebar-btn:hover {
+  background-color: #27ae60;
+}
