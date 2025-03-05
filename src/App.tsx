@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './styles/App.css';
 import Keyboard from './components/Keyboard';
 import { wordList } from './utils';
+import Hangman from './components/Hangman';
 
 const App: React.FC = () => {
   const [keyboardKey, setKeyboardKey] = useState(0);
@@ -17,10 +18,11 @@ const App: React.FC = () => {
   ) as HTMLCollectionOf<HTMLSpanElement>;
 
   function handleRefresh() {
-    setWordObj(wordList[Math.floor(Math.random() * 850)]);
+    const newWordObj = wordList[Math.floor(Math.random() * 850)];
+    setWordObj(newWordObj);
     setKeyboardKey((prev) => prev + 1); // to remount the Keyboard component
     setAttempts(7);
-    setCharLeft(wordObj.word.split(''));
+    setCharLeft(newWordObj.word.split(''));
     for (let i = 0; i < charSpans.length; i++) {
       const charSpan = charSpans.item(i);
       if (charSpan) {
@@ -41,7 +43,7 @@ const App: React.FC = () => {
       for (let i = 0; i < charSpans.length; i++) {
         const charSpan = charSpans.item(i);
         if (charSpan && charSpan.innerText == input) {
-          charSpan.style.display = 'inline-block';
+          charSpan.style.display = 'inline';
           charSpan.style.color = 'green';
         }
       }
@@ -65,14 +67,16 @@ const App: React.FC = () => {
     if (!attempts)
       for (let i = 0; i < charSpans.length; i++) {
         const charSpan = charSpans.item(i);
-        if (charSpan) charSpan.style.display = 'inline-block';
+        if (charSpan) charSpan.style.display = 'inline';
       }
   }, [attempts]);
 
   return (
     <div className="main">
       <div>info container</div>
-      <div>stickman</div>
+      <div>
+        <Hangman numberOfGuesses={attempts} />
+      </div>
       <div
         className="char-container"
         style={{ display: 'flex', gap: '2rem' }}>
