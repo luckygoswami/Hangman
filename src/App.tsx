@@ -7,7 +7,9 @@ import Hangman from './components/Hangman';
 const App: React.FC = () => {
   const [keyboardKey, setKeyboardKey] = useState(0);
   const [userInput, setUserInput] = useState<string | null>();
-  const [attempts, setAttempts] = useState(7);
+  const [correctGuess, setCorrectGuess] = useState<string[]>([]);
+  const [incorrectGuess, setIncorrectGuess] = useState<string[]>([]);
+  const attempts = 7 - incorrectGuess.length;
   const [wordObj, setWordObj] = useState(
     wordList[Math.floor(Math.random() * 850)]
   );
@@ -22,7 +24,8 @@ const App: React.FC = () => {
     const newWordObj = wordList[Math.floor(Math.random() * 850)];
     setWordObj(newWordObj);
     setKeyboardKey((prev) => prev + 1); // just to remount the Keyboard component
-    setAttempts(7);
+    setCorrectGuess([]);
+    setIncorrectGuess([]);
     setCharLeft(newWordObj.word.split(''));
     for (let i = 0; i < charSpans.length; i++) {
       const charSpan = charSpans.item(i);
@@ -34,29 +37,25 @@ const App: React.FC = () => {
   }
 
   function handleUserInput(input: string) {
-    input = input.toUpperCase();
-    const charBtn = document.getElementById(`${input}-btn`);
-
-    if (charLeft.includes(input.toLowerCase())) {
+    if (correctGuess.includes(input) || incorrectGuess.includes(input)) return; // Return early if the user input is duplicate
+    if (charLeft.includes(input)) {
       // Correct guess logic
+      setCorrectGuess((prev) => [...prev, input]);
 
       // reveal the character occurence
       for (let i = 0; i < charSpans.length; i++) {
         const charSpan = charSpans.item(i);
-        if (charSpan && charSpan.innerText == input) {
+        if (charSpan && charSpan.innerText == input.toUpperCase()) {
           charSpan.style.display = 'inline';
           charSpan.style.color = 'green';
         }
       }
 
       // update the charleft array
-      setCharLeft(charLeft.filter((char) => char != input.toLowerCase()));
-
-      charBtn?.setAttribute('disabled', 'true');
+      setCharLeft(charLeft.filter((char) => char != input));
     } else {
       // Incorrect guess logic
-      setAttempts((prev) => prev - 1);
-      charBtn?.setAttribute('disabled', 'true');
+      setIncorrectGuess((prev) => [...prev, input]);
     }
   }
 
@@ -75,9 +74,7 @@ const App: React.FC = () => {
   return (
     <div className="main">
       <div>Info Container</div>
-      <div>
-        <Hangman numberOfGuesses={attempts} />
-      </div>
+      <div>{/* <Hangman numberOfGuesses={attempts} /> */}</div>
       <div
         className="char-container"
         style={{ display: 'flex', gap: '2rem' }}>
@@ -98,11 +95,7 @@ const App: React.FC = () => {
             </div>
           ))}
       </div>
-      <div>
-        attempts left: {attempts} &nbsp;{' '}
-        <button onClick={() => console.log(wordObj.word)}>answer</button>
-        <button onClick={() => console.log(charLeft)}>char left</button>
-      </div>
+      <div>attempts left: {attempts} &nbsp; </div>
       <div className="keyboard-container">
         <Keyboard
           key={keyboardKey}
@@ -110,6 +103,8 @@ const App: React.FC = () => {
           handleRefresh={handleRefresh}
           isWinner={isWinner}
           isGameOver={isGameOver}
+          correctGuess={correctGuess}
+          incorrectGuess={incorrectGuess}
         />
       </div>
     </div>
