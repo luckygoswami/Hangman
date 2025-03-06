@@ -2,6 +2,8 @@ html,
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Caveat', cursive;
+  background: #f4f1de;
 }
 .main {
   width: 100vw;
