@@ -52,6 +52,7 @@
     border: 2px solid #c0392b;
     position: relative;
     box-shadow: 2px 2px 0px #922b21;
+    animation: shaky 0.2s ease-in-out;
   }
 }
 

@@ -14,26 +14,11 @@ const App: React.FC = () => {
     wordList[Math.floor(Math.random() * 850)]
   );
   const [charLeft, setCharLeft] = useState(wordObj.word.split(''));
-  const charSpans = document.getElementsByClassName(
-    'char-span'
-  ) as HTMLCollectionOf<HTMLSpanElement>;
   const isWinner = !charLeft.length;
   const isGameOver = !attempts;
 
   function handleRefresh() {
-    const newWordObj = wordList[Math.floor(Math.random() * 850)];
-    setWordObj(newWordObj);
-    setKeyboardKey((prev) => prev + 1); // just to remount the Keyboard component
-    setCorrectGuess([]);
-    setIncorrectGuess([]);
-    setCharLeft(newWordObj.word.split(''));
-    for (let i = 0; i < charSpans.length; i++) {
-      const charSpan = charSpans.item(i);
-      if (charSpan) {
-        charSpan.style.display = 'none';
-        charSpan.style.color = 'red';
-      }
-    }
+    setWordObj(wordList[Math.floor(Math.random() * 850)]);
   }
 
   function handleUserInput(input: string) {
@@ -41,17 +26,6 @@ const App: React.FC = () => {
     if (charLeft.includes(input)) {
       // Correct guess logic
       setCorrectGuess((prev) => [...prev, input]);
-
-      // reveal the character occurence
-      for (let i = 0; i < charSpans.length; i++) {
-        const charSpan = charSpans.item(i);
-        if (charSpan && charSpan.innerText == input.toUpperCase()) {
-          charSpan.style.display = 'inline';
-          charSpan.style.color = 'green';
-        }
-      }
-
-      // update the charleft array
       setCharLeft(charLeft.filter((char) => char != input));
     } else {
       // Incorrect guess logic
@@ -60,40 +34,41 @@ const App: React.FC = () => {
   }
 
   useEffect(() => {
-    if (userInput) charLeft.length && attempts && handleUserInput(userInput);
-  }, [userInput]);
+    // Kind of handle refresh
+    setKeyboardKey((prev) => prev + 1); // just to remount the Keyboard component
+    setCorrectGuess([]);
+    setIncorrectGuess([]);
+    setCharLeft(wordObj.word.split(''));
+  }, [wordObj]);
 
   useEffect(() => {
-    if (!attempts)
-      for (let i = 0; i < charSpans.length; i++) {
-        const charSpan = charSpans.item(i);
-        if (charSpan) charSpan.style.display = 'inline';
-      }
-  }, [attempts]);
+    if (userInput) charLeft.length && attempts && handleUserInput(userInput);
+  }, [userInput]);
 
   return (
     <div className="main">
       <div>Info Container</div>
       <div>{/* <Hangman numberOfGuesses={attempts} /> */}</div>
-      <div
-        className="char-container"
-        style={{ display: 'flex', gap: '2rem' }}>
-        {wordObj.word
-          .toUpperCase()
-          .split('')
-          .map((char, index) => (
-            <div
-              key={index}
-              className="char-box"
-              style={{ padding: '0.5rem', borderBottom: 'solid 5px black' }}>
-              <span
-                key={index}
-                className={`char-span ${char}-char`}
-                style={{ display: 'none', color: 'red' }}>
-                {char}
-              </span>
-            </div>
-          ))}
+      <div className="word-container">
+        {wordObj.word.split('').map((char, index) => (
+          <div
+            key={`${wordObj.word}-${index}`}
+            className="char-box">
+            <span
+              key={char}
+              className={`char-span ${
+                correctGuess.includes(char)
+                  ? 'correct-guess'
+                  : !attempts
+                  ? 'not-guessed'
+                  : ''
+              }`}>
+              {correctGuess.includes(char) || isGameOver || isWinner
+                ? char
+                : '🖕'}
+            </span>
+          </div>
+        ))}
       </div>
       <div>attempts left: {attempts} &nbsp; </div>
       <div className="keyboard-container">
