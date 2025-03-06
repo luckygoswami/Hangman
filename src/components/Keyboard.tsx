@@ -72,7 +72,7 @@ const Keyboard: React.FC<KeyboardProps> = ({
       <button
         className="spacebar-btn"
         onClick={handleRefresh}>
-        Refresh
+        REFRESH
       </button>
     </div>
   );

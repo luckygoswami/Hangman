@@ -73,9 +73,22 @@ const App: React.FC = () => {
           </div>
         ))}
       </div>
-      <div>
-        attempts left: {attempts} &nbsp;{' '}
-        <button onClick={() => setHintReveal((prev) => !prev)}>Hint</button>
+      <div className="actions-menu">
+        <div className="attempts-box">{attempts} attempts left</div>
+        <div className="hint-box">
+          <span className="hint-label">
+            {hintReveal ? 'Hide' : 'Show'} Hint
+          </span>
+          <label className="switch">
+            <input
+              type="checkbox"
+              id="hint-toggle"
+              defaultChecked={hintReveal}
+              onClick={() => setHintReveal((prev) => !prev)}
+            />
+            <span className="slider round"></span>
+          </label>
+        </div>
       </div>
       <div className="keyboard-container">
         <Keyboard
