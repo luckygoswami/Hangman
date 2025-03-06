@@ -16,6 +16,7 @@ const App: React.FC = () => {
   const [charLeft, setCharLeft] = useState(wordObj.word.split(''));
   const isWinner = !charLeft.length;
   const isGameOver = !attempts;
+  const [hintReveal, setHintReveal] = useState(false);
 
   function handleRefresh() {
     setWordObj(wordList[Math.floor(Math.random() * 850)]);
@@ -47,7 +48,9 @@ const App: React.FC = () => {
 
   return (
     <div className="main">
-      <div>Info Container</div>
+      <div className={`hint-container ${hintReveal ? 'hint-revealed' : ''}`}>
+        {wordObj.hint}
+      </div>
       <div>{/* <Hangman numberOfGuesses={attempts} /> */}</div>
       <div className="word-container">
         {wordObj.word.split('').map((char, index) => (
@@ -70,7 +73,10 @@ const App: React.FC = () => {
           </div>
         ))}
       </div>
-      <div>attempts left: {attempts} &nbsp; </div>
+      <div>
+        attempts left: {attempts} &nbsp;{' '}
+        <button onClick={() => setHintReveal((prev) => !prev)}>Hint</button>
+      </div>
       <div className="keyboard-container">
         <Keyboard
           key={keyboardKey}

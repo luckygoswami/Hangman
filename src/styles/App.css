@@ -71,6 +71,27 @@ body {
   }
 }
 
+/* Hint Container */
+.hint-container {
+  display: none;
+
+  &.hint-revealed {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    font-size: 1.5rem;
+    font-family: 'Patrick Hand', cursive;
+    color: #2c3e50;
+    background: #f4f1de;
+    border: 3px solid black;
+    border-radius: 8px;
+    box-shadow: 3px 3px 0px black;
+    max-width: 80%;
+    text-align: center;
+    animation: shaky 0.1s ease-in;
+  }
+}
+
 @keyframes shaky {
   0% {
     transform: translate(2px, 2px) rotate(0deg);

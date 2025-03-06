@@ -21,21 +21,22 @@ const Keyboard: React.FC<KeyboardProps> = ({
   incorrectGuess,
 }) => {
   useEffect(() => {
-    // handle keyboard input
-    const handleKeypress = (e: globalThis.KeyboardEvent) => {
+    // Handle keyboard input
+    const handleKeydown = (e: globalThis.KeyboardEvent) => {
       const input = e.key.toLowerCase();
 
       if (input == ' ') {
+        e.preventDefault();
         handleRefresh();
       } else {
         /^[a-zA-Z]$/.test(input) && userInput(input);
       }
     };
 
-    window.addEventListener('keypress', handleKeypress);
+    window.addEventListener('keydown', handleKeydown);
 
     return () => {
-      window.removeEventListener('keypress', handleKeypress);
+      window.removeEventListener('keydown', handleKeydown);
     };
   }, []);
 
