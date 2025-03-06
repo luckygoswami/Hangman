@@ -4,15 +4,50 @@ body {
   padding: 0;
   font-family: 'Patrick Hand', cursive;
   background: #f4f1de;
-}
-.main {
   width: 100vw;
   height: 100vh;
+}
+
+header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.5rem;
+  font-size: 3rem;
+  font-weight: bold;
+  box-shadow: 0px 5px 0px black;
+  color: green;
+
+  .a-span {
+    color: red;
+  }
+
+  &::after {
+    content: '🎨';
+    font-size: 2.5rem;
+  }
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  box-shadow: 0px -5px 0px black;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.main {
+  height: calc(100vh - 130px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
+  justify-content: space-evenly;
   background-color: rgba(173, 216, 230, 0.171);
 }
 
@@ -22,7 +57,6 @@ body {
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
   padding: 10px;
   border: 3px solid black;
   border-radius: 6px;
@@ -75,21 +109,18 @@ body {
 
 /* Hint Container */
 .hint-container {
-  display: none;
+  padding: 10px 15px;
+  font-size: 1.5rem;
+  color: #2c3e50;
+  background: #f4f1de;
+  border: 3px solid black;
+  border-radius: 8px;
+  box-shadow: 3px 3px 0px black;
+  max-width: 80%;
+  text-align: center;
 
   &.hint-revealed {
-    display: block;
-    margin-top: 20px;
-    padding: 10px 15px;
-    font-size: 1.5rem;
-    color: #2c3e50;
-    background: #f4f1de;
-    border: 3px solid black;
-    border-radius: 8px;
-    box-shadow: 3px 3px 0px black;
-    max-width: 80%;
-    text-align: center;
-    animation: shaky 0.1s ease-in;
+    animation: shaky 0.2s ease-in;
   }
 }
 

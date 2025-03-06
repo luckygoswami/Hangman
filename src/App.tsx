@@ -47,61 +47,74 @@ const App: React.FC = () => {
   }, [userInput]);
 
   return (
-    <div className="main">
-      <div className={`hint-container ${hintReveal ? 'hint-revealed' : ''}`}>
-        {wordObj.hint}
-      </div>
-      <div>{/* <Hangman numberOfGuesses={attempts} /> */}</div>
-      <div className="word-container">
-        {wordObj.word.split('').map((char, index) => (
-          <div
-            key={`${wordObj.word}-${index}`}
-            className="char-box">
-            <span
-              key={char}
-              className={`char-span ${
-                correctGuess.includes(char)
-                  ? 'correct-guess'
-                  : !attempts
-                  ? 'not-guessed'
-                  : ''
-              }`}>
-              {correctGuess.includes(char) || isGameOver || isWinner
-                ? char
-                : '🖕'}
+    <>
+      <header>
+        H<span className="a-span">A</span>NGM
+        <span className="a-span">A</span>N
+      </header>
+
+      <div className="main">
+        <div className={`hint-container ${hintReveal ? 'hint-revealed' : ''}`}>
+          {hintReveal
+            ? wordObj.hint
+            : 'Being a serverless game, you still can’t outsmart my code. Keep guessing!'}
+        </div>
+        <div className="word-container">
+          {wordObj.word.split('').map((char, index) => (
+            <div
+              key={`${wordObj.word}-${index}`}
+              className="char-box">
+              <span
+                key={char}
+                className={`char-span ${
+                  correctGuess.includes(char)
+                    ? 'correct-guess'
+                    : !attempts
+                    ? 'not-guessed'
+                    : ''
+                }`}>
+                {correctGuess.includes(char) || isGameOver || isWinner
+                  ? char
+                  : '🖕'}
+              </span>
+            </div>
+          ))}
+        </div>
+        <div className="actions-menu">
+          <div className="attempts-box">{attempts} attempts left</div>
+          <div className="hint-box">
+            <span className="hint-label">
+              {hintReveal ? 'Hide' : 'Show'} Hint
             </span>
+            <label className="switch">
+              <input
+                type="checkbox"
+                id="hint-toggle"
+                defaultChecked={hintReveal}
+                onClick={() => setHintReveal((prev) => !prev)}
+              />
+              <span className="slider round"></span>
+            </label>
           </div>
-        ))}
-      </div>
-      <div className="actions-menu">
-        <div className="attempts-box">{attempts} attempts left</div>
-        <div className="hint-box">
-          <span className="hint-label">
-            {hintReveal ? 'Hide' : 'Show'} Hint
-          </span>
-          <label className="switch">
-            <input
-              type="checkbox"
-              id="hint-toggle"
-              defaultChecked={hintReveal}
-              onClick={() => setHintReveal((prev) => !prev)}
-            />
-            <span className="slider round"></span>
-          </label>
+        </div>
+        <div className="keyboard-container">
+          <Keyboard
+            key={keyboardKey}
+            userInput={setUserInput}
+            handleRefresh={handleRefresh}
+            isWinner={isWinner}
+            isGameOver={isGameOver}
+            correctGuess={correctGuess}
+            incorrectGuess={incorrectGuess}
+          />
         </div>
       </div>
-      <div className="keyboard-container">
-        <Keyboard
-          key={keyboardKey}
-          userInput={setUserInput}
-          handleRefresh={handleRefresh}
-          isWinner={isWinner}
-          isGameOver={isGameOver}
-          correctGuess={correctGuess}
-          incorrectGuess={incorrectGuess}
-        />
-      </div>
-    </div>
+
+      <footer>
+        Made with 🧠 by&nbsp;
+        <a href="https://linkedin.com/in/deepakgoswamii">Deepak Goswami</a>
+      </footer>
+    </>
   );
 };
 
