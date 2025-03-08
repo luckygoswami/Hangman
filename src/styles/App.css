@@ -11,7 +11,8 @@ main {
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-rows: 70px 1fr 50px;
+  grid-template-rows: 4rem 1fr 3rem;
+  user-select: none;
 
   header {
     display: flex;
@@ -60,9 +61,6 @@ main {
     background-color: rgba(173, 216, 230, 0.171);
 
     .game-container {
-      height: calc(100vh - 130px);
-      max-width: 100%;
-
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -185,6 +183,7 @@ main {
         background: #ddd;
         cursor: pointer;
         box-shadow: 2px 2px 0px black;
+        -webkit-tap-highlight-color: transparent;
       }
 
       .switch input {
@@ -284,5 +283,52 @@ main {
   }
   100% {
     transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    grid-template-rows: 3rem 1fr 2rem;
+
+    header {
+      font-size: 2rem;
+      letter-spacing: 0.3rem;
+    }
+
+    section {
+      grid-template-columns: 1fr;
+
+      .game-container {
+        .hint-container {
+          font-size: 1rem;
+          max-width: 90%;
+          margin: 0.5rem;
+        }
+
+        .word-container {
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          margin: 0.5rem;
+          padding: 0.5rem;
+        }
+
+        .char-box {
+          padding: 0.1rem;
+        }
+
+        .actions-menu {
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+
+      .drawing-container {
+        display: none;
+      }
+    }
+
+    footer {
+      font-size: 0.8rem;
+    }
   }
 }

@@ -13,9 +13,8 @@ This isn't your average Hangman game. **This is Sketchy Hangman.** ✏️
 🔥 **The UI is straight-up art** – Every stroke looks hand-drawn, making it _feel_ like you’re playing on paper  
 🔥 **It's fast, responsive, and buttery smooth** – Built with cutting-edge tech (React + Vite)  
 🔥 **Hints toggler** – Because we’re not all spelling bee champions
+🔥 **Mobile-friendly** – Play it anywhere, anytime  
 🔥 **Pure skill, no shortcuts** – It’s **serverless**, but you still can’t outsmart this code
-
-<!-- 🔥 **Mobile-friendly** – Play it anywhere, anytime   -->
 
 ## **🛠️ Tech Stack (For the Nerds 🤓)**
 
