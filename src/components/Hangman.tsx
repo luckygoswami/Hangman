@@ -14,7 +14,7 @@ const Hangman: React.FC<HangmanProps> = ({ attempts }) => {
         height="100%"
         className="hangman-svg"
         stroke="#444"
-        stroke-opacity="0.8">
+        strokeOpacity="0.8">
         {/* Gallows */}
         <path
           d="M80 380 Q85 300 80 100 C85 20 200 0 200 10 L200 50"
