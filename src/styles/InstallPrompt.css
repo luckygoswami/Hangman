@@ -1,0 +1,44 @@
+.install-banner {
+  box-sizing: border-box;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 35%;
+  background: #ffffffbe;
+  color: #2d2d2d;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  padding: 0 1rem;
+  font-weight: bold;
+  letter-spacing: 0.25px;
+  backdrop-filter: blur(1px);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.install-banner button {
+  background: #2d2d2d;
+  color: rgb(255, 255, 255);
+  padding: 0.5rem 0.75rem;
+  margin-right: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+@media (max-width: 480px) {
+  .install-banner {
+    background: #ffffffce;
+    backdrop-filter: blur(2px);
+    height: 3rem;
+    width: 100%;
+  }
+}

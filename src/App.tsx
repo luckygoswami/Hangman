@@ -3,6 +3,7 @@ import './styles/App.css';
 import Keyboard from './components/Keyboard';
 import { wordList } from './utils';
 import Hangman from './components/Hangman';
+import InstallPrompt from './components/InstallPrompt';
 
 const App: React.FC = () => {
   const [keyboardKey, setKeyboardKey] = useState(0);
@@ -126,6 +127,7 @@ const App: React.FC = () => {
           Made with 🧠 by&nbsp;
           <a href="https://linkedin.com/in/deepakgoswamii">Deepak Goswami</a>
         </footer>
+        <InstallPrompt />
       </main>
     </>
   );

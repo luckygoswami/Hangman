@@ -17,6 +17,9 @@ export default defineConfig({
         theme_color: '#2d2d2d',
         background_color: '#f4f1de',
         display: 'standalone',
+        start_url: '/Hangman/',
+        scope: '/Hangman/',
+        orientation: 'portrait',
         icons: [
           {
             src: 'favicon-96x96.png',
@@ -68,5 +71,5 @@ export default defineConfig({
       },
     }),
   ],
-  base: '/Hangman/',
+  base: '/Hangman',
 });
