@@ -21,6 +21,7 @@ const InstallPrompt: React.FC = () => {
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
   const [showBanner, setShowBanner] = useState(false);
+  const [isHiding, setIsHiding] = useState(false);
 
   useEffect(() => {
     const beforeInstallPromptHandler = (e: Event) => {
@@ -41,22 +42,32 @@ const InstallPrompt: React.FC = () => {
     };
   }, []);
 
-  const handleInstallClick = (): void => {
+  const handleInstall = (): void => {
     deferredPrompt?.prompt();
-    deferredPrompt?.userChoice.then(() => {
-      setDeferredPrompt(null);
-      setShowBanner(false);
+    deferredPrompt?.userChoice.then((res) => {
+      if (res.outcome == 'accepted') {
+        setDeferredPrompt(null);
+        setShowBanner(false);
+      }
     });
   };
 
+  const handleClose = (): void => {
+    setIsHiding(true);
+
+    setTimeout(() => {
+      setShowBanner(false);
+    }, 1000);
+  };
+
   return showBanner ? (
-    <div className="install-banner">
+    <div className={`install-banner ${isHiding ? 'hide' : ''}`}>
       <p>Install Hangman to play offline!</p>
       <div className="banner-actions">
-        <button onClick={handleInstallClick}>Install</button>
+        <button onClick={handleInstall}>Install</button>
         <span
           className="close-btn"
-          onClick={() => setShowBanner(false)}>
+          onClick={handleClose}>
           ✖
         </span>
       </div>

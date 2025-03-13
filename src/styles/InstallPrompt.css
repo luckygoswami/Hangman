@@ -16,6 +16,12 @@
   letter-spacing: 0.25px;
   backdrop-filter: blur(1px);
   -webkit-tap-highlight-color: transparent;
+  transform: translateY(-100%);
+  animation: slideDown 0.5s ease-in-out forwards;
+}
+
+.install-banner.hide {
+  animation: slideUp 0.5s ease-in-out forwards;
 }
 
 .install-banner button {
@@ -40,5 +46,23 @@
     backdrop-filter: blur(2px);
     height: 3rem;
     width: 100%;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
   }
 }
