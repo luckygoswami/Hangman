@@ -70,9 +70,9 @@ const Keyboard: React.FC<KeyboardProps> = ({
         </div>
       ))}
       <button
-        className="spacebar-btn"
+        className={`spacebar-btn ${isGameOver || isWinner ? 'next-btn' : ''}`}
         onClick={handleRefresh}>
-        REFRESH
+        {isWinner || isGameOver ? 'NEXT' : 'REFRESH'}
       </button>
     </div>
   );

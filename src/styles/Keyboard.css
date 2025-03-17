@@ -72,13 +72,21 @@
 .spacebar-btn {
   width: 50%;
   padding: 12px 20px;
-  background-color: var(--success-color);
   font-size: 1rem;
   letter-spacing: 0.1rem;
-}
+  background-color: var(--primary-color);
 
-.spacebar-btn:hover {
-  background-color: var(--success-hover);
+  &:hover {
+    background-color: var(--primary-hover);
+  }
+
+  &.next-btn {
+    background-color: var(--success-color);
+
+    &:hover {
+      background-color: var(--success-hover);
+    }
+  }
 }
 
 @media (max-width: 480px) {
