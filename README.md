@@ -14,7 +14,10 @@ This isn't your average Hangman game. **This is Sketchy Hangman.** ✏️
 🔥 **It's fast, responsive, and buttery smooth** – Built with cutting-edge tech (React + Vite)  
 🔥 **Hints toggler** – Because we’re not all spelling bee champions
 🔥 **Mobile-friendly** – Play it anywhere, anytime  
-🔥 **Pure skill, no shortcuts** – It’s **serverless**, but you still can’t outsmart this code
+🔥 **Pure skill, no shortcuts** – It’s **serverless**, but you still can’t outsmart this code  
+🔥 **Fully Offline Support** – Play anytime, even with **zero internet connection**, thanks to **PWA caching**!  
+🔥 **Native-Like Experience** – Install it on your device like a real app!  
+🔥 **No Ads, No Tracking, No BS** – Just pure, unadulterated fun
 
 ## **🛠️ Tech Stack (For the Nerds 🤓)**
 

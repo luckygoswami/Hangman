@@ -6,7 +6,7 @@ import Hangman from './components/Hangman';
 import InstallPrompt from './components/InstallPrompt';
 
 const App: React.FC = () => {
-  const [keyboardKey, setKeyboardKey] = useState(0);
+  const [keyboardKey, setKeyboardKey] = useState<number>(1);
   const [userInput, setUserInput] = useState<string | null>();
   const [correctGuess, setCorrectGuess] = useState<string[]>([]);
   const [incorrectGuess, setIncorrectGuess] = useState<string[]>([]);
